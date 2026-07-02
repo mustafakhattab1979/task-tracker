@@ -6,5 +6,13 @@
     "status": "todo",
     "priority": "high",
     "due_date": "2026-06-01"
+  },
+  {
+    "id": "ef343264-57ed-4c7a-a842-4d3f4a843091",
+    "title": "Fix login bug",
+    "description": "Users cannot login with email",
+    "status": "in_progress",
+    "priority": "high",
+    "due_date": "2026-07-10"
   }
 ]

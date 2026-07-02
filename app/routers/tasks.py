@@ -4,16 +4,23 @@ import uuid
 from typing import List, Optional
 from datetime import date
 from fastapi import APIRouter, HTTPException, Query
-from app.models import Task, TaskCreate, TaskUpdate
+from app.models import Task, TaskCreate, TaskUpdate, TaskStatus, TaskPriority
 from app.storage import read_tasks, write_tasks, get_task_by_id
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 
 @router.get("/", response_model=List[Task])
-def get_tasks(overdue: Optional[bool] = Query(None)):
-    """Return all tasks. Filter by overdue=true to get only overdue tasks."""
+def get_tasks(
+    overdue: Optional[bool] = Query(None),
+    search: Optional[str] = Query(None),
+    status: Optional[TaskStatus] = Query(None),
+    priority: Optional[TaskPriority] = Query(None),
+):
+    """Return all tasks with optional filters."""
     tasks = read_tasks()
+
+    # Filter by overdue
     if overdue is True:
         today = date.today()
         tasks = [
@@ -22,6 +29,24 @@ def get_tasks(overdue: Optional[bool] = Query(None)):
             and t.due_date < today
             and t.status != "done"
         ]
+
+    # Filter by status
+    if status is not None:
+        tasks = [t for t in tasks if t.status == status]
+
+    # Filter by priority
+    if priority is not None:
+        tasks = [t for t in tasks if t.priority == priority]
+
+    # Search by title or description
+    if search is not None:
+        search_lower = search.lower()
+        tasks = [
+            t for t in tasks
+            if search_lower in t.title.lower()
+            or (t.description and search_lower in t.description.lower())
+        ]
+
     return tasks
 
 
