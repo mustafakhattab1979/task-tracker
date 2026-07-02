@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "c28a8a01-4c72-485f-adff-0eedc8d5010d",
+    "title": "Test Task",
+    "description": "A test task",
+    "status": "todo",
+    "priority": "medium",
+    "due_date": null
+  },
+  {
+    "id": "a3035eb6-ecc6-4e80-9f91-6b365a376876",
+    "title": "Task with due date",
+    "description": null,
+    "status": "todo",
+    "priority": "high",
+    "due_date": "2026-06-01"
+  }
+]

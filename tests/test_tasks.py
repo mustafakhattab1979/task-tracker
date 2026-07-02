@@ -1,99 +1,70 @@
-# Defines all task-related API endpoints
+# Pytest tests for the Task Tracker API
 
-import uuid
-from typing import List, Optional
-from datetime import date
-from fastapi import APIRouter, HTTPException, Query
-from app.models import Task, TaskCreate, TaskUpdate, TaskStatus, TaskPriority
-from app.storage import read_tasks, write_tasks, get_task_by_id
+import pytest
+from fastapi.testclient import TestClient
+from app.main import app
 
-router = APIRouter(prefix="/tasks", tags=["tasks"])
+client = TestClient(app)
 
 
-@router.get("/", response_model=List[Task])
-def get_tasks(
-    overdue: Optional[bool] = Query(None),
-    search: Optional[str] = Query(None),
-    status: Optional[TaskStatus] = Query(None),
-    priority: Optional[TaskPriority] = Query(None),
-):
-    """Return all tasks with optional filters."""
-    tasks = read_tasks()
-
-    # Filter by search keyword in title or description
-    if search:
-        search_lower = search.lower()
-        tasks = [
-            t for t in tasks
-            if search_lower in t.title.lower()
-            or (t.description and search_lower in t.description.lower())
-        ]
-
-    # Filter by status
-    if status:
-        tasks = [t for t in tasks if t.status == status]
-
-    # Filter by priority
-    if priority:
-        tasks = [t for t in tasks if t.priority == priority]
-
-    # Filter overdue tasks
-    if overdue is True:
-        today = date.today()
-        tasks = [
-            t for t in tasks
-            if t.due_date is not None
-            and t.due_date < today
-            and t.status != "done"
-        ]
-
-    return tasks
+def test_health_check():
+    """Test the health endpoint returns 200 and ok status."""
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json()["status"] == "ok"
 
 
-@router.post("/", response_model=Task, status_code=201)
-def create_task(task_in: TaskCreate):
-    """Create a new task."""
-    tasks = read_tasks()
-    new_task = Task(
-        id=str(uuid.uuid4()),
-        **task_in.model_dump()
-    )
-    tasks.append(new_task)
-    write_tasks(tasks)
-    return new_task
+def test_create_task():
+    """Test creating a new task returns 201."""
+    response = client.post("/tasks/", json={
+        "title": "Test Task",
+        "description": "A test task",
+        "status": "todo",
+        "priority": "medium"
+    })
+    assert response.status_code == 201
+    assert response.json()["title"] == "Test Task"
 
 
-@router.get("/{task_id}", response_model=Task)
-def get_task(task_id: str):
-    """Return a single task by ID."""
-    task = get_task_by_id(task_id)
-    if not task:
-        raise HTTPException(status_code=404, detail="Task not found")
-    return task
+def test_get_tasks():
+    """Test getting all tasks returns 200."""
+    response = client.get("/tasks/")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
 
 
-@router.patch("/{task_id}", response_model=Task)
-def update_task(task_id: str, task_in: TaskUpdate):
-    """Update an existing task."""
-    tasks = read_tasks()
-    for i, task in enumerate(tasks):
-        if task.id == task_id:
-            updated = task.model_dump()
-            updates = task_in.model_dump()
-            for k, v in updates.items():
-                if v is not None:
-                    updated[k] = v
-            tasks[i] = Task(**updated)
-            write_tasks(tasks)
-            return tasks[i]
-    raise HTTPException(status_code=404, detail="Task not found")
+def test_create_task_with_due_date():
+    """Test creating a task with a due date."""
+    response = client.post("/tasks/", json={
+        "title": "Task with due date",
+        "status": "todo",
+        "priority": "high",
+        "due_date": "2026-06-01"
+    })
+    assert response.status_code == 201
+    assert response.json()["due_date"] == "2026-06-01"
 
 
-@router.delete("/{task_id}", status_code=204)
-def delete_task(task_id: str):
-    """Delete a task by ID."""
-    tasks = read_tasks()
-    new_tasks = [t for t in tasks if t.id != task_id]
-    if len(new_tasks) == len(tasks):
-        raise HTTPException(status_code=404, detail="Task not found")
-    write_tasks(new_tasks)
+def test_search_tasks():
+    """Test searching tasks by keyword."""
+    response = client.get("/tasks/?search=Test")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+
+
+def test_delete_task():
+    """Test deleting a task returns 204."""
+    create = client.post("/tasks/", json={
+        "title": "Task to delete",
+        "status": "todo",
+        "priority": "low"
+    })
+    task_id = create.json()["id"]
+    response = client.delete(f"/tasks/{task_id}")
+    assert response.status_code == 204
+
+
+def test_task_not_found():
+    """Test getting a non-existent task returns 404."""
+    response = client.get("/tasks/nonexistent-id")
+    assert response.status_code == 404
