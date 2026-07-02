@@ -1,5 +1,5 @@
 # Entry point for the Task Tracker backend.
-# Creates the FastAPI application instance and defines the /health endpoint.
+# Creates the FastAPI application instance and registers all routers.
 
 from datetime import datetime, timezone
 import os
@@ -7,8 +7,9 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from pydantic import BaseModel
+from app.routers import tasks
 
-# Load environment variables from .env (falls back to defaults if not present)
+# Load environment variables from .env
 load_dotenv()
 
 APP_ENV = os.getenv("APP_ENV", "development")
@@ -21,18 +22,24 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# Pydantic model defining the shape of the /health response
+# Register routers
+app.include_router(tasks.router)
+
+
+# Pydantic model for health response
 class HealthResponse(BaseModel):
     status: str
     timestamp: str
 
+
 @app.get("/health", response_model=HealthResponse, status_code=200)
 def health_check() -> HealthResponse:
-    """Returns API health status and the current UTC timestamp in ISO 8601 format."""
+    """Returns API health status and current UTC timestamp."""
     return HealthResponse(
         status="ok",
         timestamp=datetime.now(timezone.utc).isoformat(),
     )
+
 
 if __name__ == "__main__":
     import uvicorn
