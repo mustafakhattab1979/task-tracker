@@ -37,6 +37,7 @@ data/
 
  docs/
      midcourse/
+     
            user-stories.md
            
            mini-adr.md
