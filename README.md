@@ -20,7 +20,7 @@ app/
 
  __init__.py    # Marks app as a Python package
  
-    main.py   # FastAPI app instance and health endpoint
+  main.py   # FastAPI app instance and health endpoint
     
  models.py    # Pydantic data models
  
@@ -38,9 +38,13 @@ data/
  docs/
      midcourse/
            user-stories.md
+           
            mini-adr.md
+           
            prompt-log.md
+           
            verification.md
+           
            reflection.md 
            
 requirements.txt  # Project dependencies 
