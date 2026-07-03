@@ -37,15 +37,10 @@ data/
 
  docs/
      midcourse/
-     
            user-stories.md
-           
            mini-adr.md
-           
            prompt-log.md
-           
            verification.md
-           
            reflection.md 
            
 requirements.txt  # Project dependencies 
