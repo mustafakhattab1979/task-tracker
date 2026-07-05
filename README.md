@@ -143,3 +143,40 @@ For production use, migrating to SQLite or PostgreSQL would be recommended.
 
 Mustafa Khattab
 GitHub: https://github.com/mustafakhattab1979
+
+
+## Final Project
+
+Branch reviewed: final-project
+
+### What this submission demonstrates
+- Existing Task Tracker app still runs inside the intended course scope.
+- CI runs the pytest suite on push and/or pull request.
+- Docker image builds and runs with /health returning 200.
+- AI review, security, and ownership evidence is in docs/.
+
+### How to run locally
+git clone https://github.com/mustafakhattab1979/task-tracker.git
+cd task-tracker
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+
+### How to run tests
+pytest tests/ -v
+
+### How to run with Docker
+docker build -t task-tracker .
+docker run -p 8000:8000 task-tracker
+curl http://localhost:8000/health
+
+### Evidence files
+- docs/release-evidence.md
+- docs/final-ai-review.md
+- docs/ai-playbook.md
+
+### AI assistance summary
+AI helped draft or review: CI / Docker / docs / security / debugging.
+I verified the work by: tests / diff review / Docker / /health / manual scan.
+One AI suggestion I rejected: AI suggested PostgreSQL which was out of scope.
