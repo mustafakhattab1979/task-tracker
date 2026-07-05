@@ -1,6 +1,6 @@
 # Task Tracker
 
-A learning-focused task tracking web application built with Python and FastAPI, using JSON file storage for simplicity. This project demonstrates core REST API and backend engineering concepts including CRUD operations, data validation with Pydantic, overdue task filtering, as well as due dates task filtering plus the combined search filters including status, priority, assignee and feature development using an AI-assisted workflow.
+A learning-focused task tracking web application built with Python and FastAPI, using JSON file storage for simplicity. This project demonstrates core REST API and backend engineering concepts including CRUD operations, data validation with Pydantic, overdue task filtering, as well as due dates task filtering plus the combined search filters including status,priority, assignee and feature development using an AI-assisted workflow.
 
 ## Tech Stack
 
@@ -15,46 +15,27 @@ A learning-focused task tracking web application built with Python and FastAPI, 
 ## Project Structure
 
 task-tracker/
-
-app/
-
- __init__.py    # Marks app as a Python package
- 
-  main.py   # FastAPI app instance and health endpoint
-    
- models.py    # Pydantic data models
- 
- storage.py   # JSON file read/write operations
- 
- routers/
- 
- __init__.py  # Marks routers as a Python package
- 
- tasks.py  # All task-related API endpoints
- 
-data/
-   tasks.json   # JSON file where tasks are stored
-
- docs/
-     midcourse/
-     
-           user-stories.md
-           
-           mini-adr.md
-           
-           prompt-log.md
-           
-           verification.md
-           
-           reflection.md 
-           
-requirements.txt  # Project dependencies 
-
-.env.example   # Example environment  variables
-
-.gitignore    # Files to ignore in Git
-  
- README.md    # Project documentation
++-- app/
+�   +-- __init__.py         # Marks app as a Python package
+�   +-- main.py             # FastAPI app instance and health endpoint
+�   +-- models.py           # Pydantic data models
+�   +-- storage.py          # JSON file read/write operations
+�   +-- routers/
+�       +-- __init__.py     # Marks routers as a Python package
+�       +-- tasks.py        # All task-related API endpoints
++-- data/
+�   +-- tasks.json          # JSON file where tasks are stored
++-- docs/
+�   +-- midcourse/
+�       +-- user-stories.md
+�       +-- mini-adr.md
+�       +-- prompt-log.md
+�       +-- verification.md
+�       +-- reflection.md
++-- requirements.txt        # Project dependencies
++-- .env.example            # Example environment variables
++-- .gitignore              # Files to ignore in Git
++-- README.md               # Project documentation
 
 ## Features
 
