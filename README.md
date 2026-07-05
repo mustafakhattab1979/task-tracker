@@ -1,41 +1,54 @@
 # Task Tracker
 
-A learning-focused task tracking web application built with Python and FastAPI, using JSON file storage for simplicity. This project demonstrates core REST API and backend engineering concepts including CRUD operations, data validation with Pydantic, overdue task filtering, as well as due dates task filtering plus the combined search filters including status,priority, assignee and feature development using an AI-assisted workflow.
+A learning-focused task tracking web application built with Python and FastAPI, using JSON file storage for simplicity. This project demonstrates core REST API and backend engineering concepts including CRUD operations, data validation with Pydantic, overdue task filtering, due dates task filtering, combined search filters including status and priority, and feature development using an AI-assisted workflow.
 
 ## Tech Stack
 
-- **Python 3.12** - Programming language
-- **FastAPI** - Modern web framework for building APIs
-- **Uvicorn** - ASGI server to run the application
-- **Pydantic** - Data validation and settings management
-- **python-dotenv** - Load environment variables from .env file
-- **JSON file storage** - Simple file-based data persistence
-- **pytest** - Testing framework
+- Python 3.12 - Programming language
+- FastAPI - Modern web framework for building APIs
+- Uvicorn - ASGI server to run the application
+- Pydantic - Data validation and settings management
+- python-dotenv - Load environment variables from .env file
+- JSON file storage - Simple file-based data persistence
+- pytest - Testing framework
 
 ## Project Structure
 
 task-tracker/
-+-- app/
-�   +-- __init__.py         # Marks app as a Python package
-�   +-- main.py             # FastAPI app instance and health endpoint
-�   +-- models.py           # Pydantic data models
-�   +-- storage.py          # JSON file read/write operations
-�   +-- routers/
-�       +-- __init__.py     # Marks routers as a Python package
-�       +-- tasks.py        # All task-related API endpoints
-+-- data/
-�   +-- tasks.json          # JSON file where tasks are stored
-+-- docs/
-�   +-- midcourse/
-�       +-- user-stories.md
-�       +-- mini-adr.md
-�       +-- prompt-log.md
-�       +-- verification.md
-�       +-- reflection.md
-+-- requirements.txt        # Project dependencies
-+-- .env.example            # Example environment variables
-+-- .gitignore              # Files to ignore in Git
-+-- README.md               # Project documentation
+    app/
+        __init__.py         # Marks app as a Python package
+        main.py             # FastAPI app instance and health endpoint
+        models.py           # Pydantic data models
+        storage.py          # JSON file read/write operations
+        routers/
+            __init__.py     # Marks routers as a Python package
+            tasks.py        # All task-related API endpoints
+    data/
+        tasks.json          # JSON file where tasks are stored
+    docs/
+        midcourse/
+            user-stories.md
+            mini-adr.md
+            prompt-log.md
+            verification.md
+            reflection.md
+        release-evidence.md
+        final-ai-review.md
+        ai-playbook.md
+    frontend/
+        index.html
+    tests/
+        test_tasks.py
+    .github/
+        workflows/
+            ci.yml
+    AGENTS.md
+    Dockerfile
+    .dockerignore
+    requirements.txt
+    .env.example
+    .gitignore
+    README.md
 
 ## Features
 
@@ -47,10 +60,10 @@ task-tracker/
 - Auto-generated interactive API documentation
 
 ### Mid Course Project Features
-- **Due Dates** - Add optional due date to any task
-- **Overdue Filter** - Filter tasks that are past their due date
-- **Search** - Search tasks by title or description
-- **Combined Filters** - Filter by status, priority, and overdue together
+- Due Dates - Add optional due date to any task
+- Overdue Filter - Filter tasks that are past their due date
+- Search - Search tasks by title or description
+- Combined Filters - Filter by status, priority, and overdue together
 
 ## API Endpoints
 
@@ -83,8 +96,6 @@ git clone https://github.com/mustafakhattab1979/task-tracker.git
 cd task-tracker
 
 ### 2. Create and activate virtual environment
-
-Windows PowerShell:
 python -m venv venv
 venv\Scripts\Activate.ps1
 
@@ -95,32 +106,22 @@ pip install -r requirements.txt
 Copy-Item .env.example .env
 
 ## Running the Server
-
 uvicorn app.main:app --reload --port 8000
 
 The API will be available at http://localhost:8000
 
 ## Testing the Health Endpoint
-
 curl http://localhost:8000/health
 
 Expected response:
-{"status": "ok", "timestamp": "2026-07-02T12:00:00.000000+00:00"}
+{status: ok, timestamp: 2026-07-05T12:00:00.000000+00:00}
 
 ## Interactive API Documentation
-
-FastAPI generates automatic interactive documentation.
 Open your browser and go to:
 http://127.0.0.1:8000/docs
 
-You can test all endpoints directly from the browser without any extra tools.
-
 ## Running Tests
-
-pytest
-
-To run with details:
-pytest -v
+pytest tests/ -v
 
 ## Environment Variables
 
@@ -130,7 +131,6 @@ pytest -v
 | APP_ENV | development | Application environment |
 
 ## Architecture Decision
-
 This project uses JSON file storage instead of a database because:
 - Lower learning curve for beginners
 - No database setup required
@@ -138,12 +138,6 @@ This project uses JSON file storage instead of a database because:
 - Fewer moving parts and dependencies
 
 For production use, migrating to SQLite or PostgreSQL would be recommended.
-
-## Author
-
-Mustafa Khattab
-GitHub: https://github.com/mustafakhattab1979
-
 
 ## Final Project
 
@@ -180,3 +174,7 @@ curl http://localhost:8000/health
 AI helped draft or review: CI / Docker / docs / security / debugging.
 I verified the work by: tests / diff review / Docker / /health / manual scan.
 One AI suggestion I rejected: AI suggested PostgreSQL which was out of scope.
+
+## Author
+Mustafa Khattab
+GitHub: https://github.com/mustafakhattab1979
