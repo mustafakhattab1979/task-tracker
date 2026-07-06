@@ -14,19 +14,20 @@ A learning-focused task tracking web application built with Python and FastAPI, 
 
 ## Project Structure
 
-task-tracker/
-+-- app/
+task-tracker
 
-    __init__.py    # Marks app as a Python package
+   app/
 
-         main.py   # FastAPI app instance and health endpoint
+      __init__.py     # Marks app as a Python package
+
+         main.py      # FastAPI app instance and health endpoint
          
-         models.py           # Pydantic data models
+         models.py     # Pydantic data models
          
-         storage.py         # JSON file read/write operations
+         storage.py    # JSON file read/write operations
          
  routers/
-         __init__.py     # Marks routers as a Python package
+         __init__.py       # Marks routers as a Python package
          
            tasks.py        # All task-related API endpoints
            
