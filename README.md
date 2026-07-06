@@ -27,16 +27,19 @@ task-tracker
          storage.py    # JSON file read/write operations
          
  routers/
+ 
          __init__.py       # Marks routers as a Python package
+         
          
            tasks.py        # All task-related API endpoints
            
     data/
+    
         tasks.json          # JSON file where tasks are stored
         
  docs/
  
- midcourse/
+    midcourse/
  
          user-stories.md
        
@@ -48,7 +51,7 @@ task-tracker
          
           reflection.md
           
-requirements.txt         # Project dependencies
+ requirements.txt        # Project dependencies
 
 .env.example             # Example environment variables
 
