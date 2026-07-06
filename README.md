@@ -41,7 +41,7 @@ task-tracker
  
     midcourse/
  
-         user-stories.md
+          user-stories.md
        
           mini-adr.md
        
@@ -51,13 +51,13 @@ task-tracker
          
           reflection.md
           
- requirements.txt        # Project dependencies
+          requirements.txt         # Project dependencies
 
-.env.example             # Example environment variables
+          .env.example             # Example environment variables
 
- .gitignore              # Files to ignore in Git
+          .gitignore               # Files to ignore in Git
  
-  README.md               # Project documentation
+           README.md               # Project documentation
 
 ## Features
 
