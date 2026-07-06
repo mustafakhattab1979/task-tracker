@@ -7,7 +7,7 @@
 - /health result: {"status": "ok", "timestamp": "2026-07-05T..."}
 - Frontend check: Opened frontend/index.html in browser. Kanban board and create/edit task flow are visible and working.
 - Test command: pytest tests/ -v
-- Test result: 7 passed in 1.03s
+- Test result: 10 passed in 1.03s
 
 ## CI Evidence
 - Workflow file: .github/workflows/ci.yml
@@ -26,5 +26,5 @@
 | Claim checked | Evidence used | Result | Change made, if any |
 |---|---|---|---|
 | uvicorn starts the API on port 8000 | Ran uvicorn app.main:app --reload --port 8000 | Confirmed working | None |
-| pytest runs 7 tests and all pass | Ran pytest tests/ -v | 7 passed in 1.03s | None |
+| pytest runs 7 tests and all pass | Ran pytest tests/ -v | 10 passed in 1.03s | None |
 | /health returns status ok | curl http://localhost:8000/health | Returns 200 with ok status | None |
