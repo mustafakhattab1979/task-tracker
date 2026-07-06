@@ -1,0 +1,106 @@
+[
+  {
+    "id": "b904b092-e5b8-4c6e-8991-4cafced29a75",
+    "title": "mustafa",
+    "description": null,
+    "status": "todo",
+    "priority": "medium",
+    "due_date": "2026-07-05"
+  },
+  {
+    "id": "fc2eb40a-ac8b-4907-96e4-487ac2e944e7",
+    "title": "Test Task",
+    "description": "A test task",
+    "status": "todo",
+    "priority": "medium",
+    "due_date": null
+  },
+  {
+    "id": "c251a69a-0b97-4941-99b0-636dccf2a88e",
+    "title": "Task with due date",
+    "description": null,
+    "status": "todo",
+    "priority": "high",
+    "due_date": "2026-06-01"
+  },
+  {
+    "id": "00bea339-fb4a-48d5-aa2c-e6b2320b3dd7",
+    "title": "Overdue task",
+    "description": null,
+    "status": "todo",
+    "priority": "high",
+    "due_date": "2026-07-05"
+  },
+  {
+    "id": "7485ca77-758a-40b6-ae31-2e2c3f047466",
+    "title": "Task without a due date",
+    "description": null,
+    "status": "todo",
+    "priority": "low",
+    "due_date": null
+  },
+  {
+    "id": "141f191d-df73-48ae-b85c-36a52f79bd74",
+    "title": "Fix login bug",
+    "description": null,
+    "status": "todo",
+    "priority": "high",
+    "due_date": null
+  },
+  {
+    "id": "2e598d61-9559-4e87-a2be-fe73350e41f0",
+    "title": "Done task for status filter",
+    "description": null,
+    "status": "done",
+    "priority": "low",
+    "due_date": null
+  },
+  {
+    "id": "53e75f8d-c73e-4f48-bc21-ee11e57807a8",
+    "title": "Test Task",
+    "description": "A test task",
+    "status": "todo",
+    "priority": "medium",
+    "due_date": null
+  },
+  {
+    "id": "671dffa1-5f9b-44ce-8826-20d416a93626",
+    "title": "Task with due date",
+    "description": null,
+    "status": "todo",
+    "priority": "high",
+    "due_date": "2026-06-01"
+  },
+  {
+    "id": "3c34e5f6-9638-4d5b-8a1e-0e8260e092a4",
+    "title": "Overdue task",
+    "description": null,
+    "status": "todo",
+    "priority": "high",
+    "due_date": "2026-07-05"
+  },
+  {
+    "id": "b4f9aaca-f09b-49b5-8682-ad7844e05169",
+    "title": "Task without a due date",
+    "description": null,
+    "status": "todo",
+    "priority": "low",
+    "due_date": null
+  },
+  {
+    "id": "211559ae-66b1-4223-8bd2-9ce075f00776",
+    "title": "Fix login bug",
+    "description": null,
+    "status": "todo",
+    "priority": "high",
+    "due_date": null
+  },
+  {
+    "id": "792400e2-fc7f-4908-87cc-217a51e5371c",
+    "title": "Done task for status filter",
+    "description": null,
+    "status": "done",
+    "priority": "low",
+    "due_date": null
+  }
+]
