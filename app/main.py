@@ -6,6 +6,7 @@ import os
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.routers import tasks
 
@@ -20,6 +21,18 @@ app = FastAPI(
     title="Task Tracker API",
     description="A learning-focused backend built with FastAPI and JSON file storage.",
     version="0.1.0",
+)
+
+# Allow the frontend (opened locally, e.g. via file:// or a local static
+# server on a different port) to call this API from the browser.
+# Without this, the browser blocks the requests with a CORS error even
+# though the backend itself is running and reachable via curl.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Register routers
